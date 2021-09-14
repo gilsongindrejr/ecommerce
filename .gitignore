@@ -1,8 +1,8 @@
 *venv/*
-
 .idea
-
 *__pycache__*
-
 *.pyc
-
+.coveragerc
+.coverage
+htmlcov/*
+*migrations/*
