@@ -1,6 +1,6 @@
 import pytest
 
-from users.models import User
+from users.models import User, Address
 
 pytestmark = pytest.mark.django_db
 
@@ -27,6 +27,19 @@ def superuser():
     )
 
 
+@pytest.fixture()
+def address():
+    return Address(
+        zip_code='00000-000',
+        address='Address',
+        house_number='123',
+        complement='Complement',
+        neighborhood='Neighborhood',
+        city='City',
+        state='State'
+    )
+
+
 def test_user_attributes(user):
     assert not user.is_staff
     assert not user.is_superuser
@@ -45,7 +58,7 @@ def test_superuser_attributes(superuser):
     assert superuser.cpf == '111.111.111-11'
 
 
-def test_str(user, superuser):
+def test_user_model_str(user, superuser):
     assert user.email == str(user)
     assert superuser.email == str(superuser)
 
@@ -83,3 +96,17 @@ def test_user_without_email():
             last_name='Last',
             cpf='444.444.444-44'
         )
+
+
+def test_address_attributes(address):
+    assert address.zip_code == '00000-000'
+    assert address.address == 'Address'
+    assert address.house_number == '123'
+    assert address.complement == 'Complement'
+    assert address.neighborhood == 'Neighborhood'
+    assert address.city == 'City'
+    assert address.state == 'State'
+
+
+def test_address_str(address):
+    assert str(address) == address.address
