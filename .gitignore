@@ -5,4 +5,6 @@
 .coveragerc
 .coverage
 htmlcov/*
-*migrations/*
+*/migrations/*
+db.sqlite3
+pytest.ini
