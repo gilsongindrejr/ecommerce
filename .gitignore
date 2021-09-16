@@ -9,3 +9,4 @@ htmlcov/*
 db.sqlite3
 pytest.ini
 media/*
+.pytest_cache/*
