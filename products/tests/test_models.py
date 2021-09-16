@@ -1,6 +1,6 @@
 import pytest
 
-from products.models import Product, get_file_path
+from products.models import Product, get_file_path, Category
 
 pytestmark = pytest.mark.django_db
 
@@ -37,3 +37,12 @@ def test_get_file_path(product):
     assert dir == 'products'
     assert len(filename) == 36
     assert ext == 'ext'
+
+
+def test_category_attribute():
+    category = Category(
+        category='Food'
+    )
+    assert category.category == 'Food'
+    assert str(category) == 'Food'
+
