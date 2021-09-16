@@ -31,6 +31,7 @@ class Product(models.Model):
     category = models.ForeignKey(Category, verbose_name=_('category'), blank=True, null=True, on_delete=models.SET_NULL)
     image = StdImageField(_('image'), upload_to=get_file_path, blank=True, variations={'thumb': (480, 480)})
     slug = models.SlugField('slug', max_length=100, editable=False)
+    is_active = models.BooleanField(_('is active'), default=True)
 
     def __str__(self):
         return self.name
