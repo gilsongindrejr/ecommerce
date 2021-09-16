@@ -5,6 +5,8 @@ from django.utils.translation import gettext_lazy as _
 from stdimage import StdImageField
 
 
+# Could have used products.models.get_file_path function
+# Decided to create another to keep file independency
 def get_file_path(_instance, filename) -> str:
     ext = filename.split('.')[-1]
     filename = f'{uuid.uuid4()}.{ext}'

@@ -1,6 +1,6 @@
 import pytest
 
-from users.models import User, Address
+from users.models import User, Address, get_file_path
 
 pytestmark = pytest.mark.django_db
 
@@ -110,3 +110,13 @@ def test_address_attributes(address):
 
 def test_address_str(address):
     assert str(address) == address.address
+
+
+def test_get_file_path(user):
+    image = get_file_path(user, 'image.ext')
+    dir = image.split('.')[0].split('/')[0]
+    image_name = image.split('.')[0].split('/')[1]
+    ext = image.split('.')[-1]
+    assert dir == 'users'
+    assert len(image_name) == 36
+    assert ext == 'ext'
