@@ -13,11 +13,23 @@ def get_file_path(_instance, filename):
     return f'products/{filename}.{ext}'
 
 
+class Category(models.Model):
+    category = models.CharField(_('category'), max_length=100)
+
+    def __str__(self):
+        return self.category
+
+    class Meta:
+        verbose_name = 'Category'
+        verbose_name_plural = 'Categories'
+
+
 class Product(models.Model):
     name = models.CharField(_('name'), max_length=100, blank=False)
     price = models.DecimalField(_('price'), max_digits=8, decimal_places=2, blank=False)
     stock = models.IntegerField(_('stock'), blank=False)
-    image = StdImageField(_('image'), upload_to=get_file_path, variations={'thumb': (480, 480)})
+    category = models.ForeignKey(Category, verbose_name=_('category'), blank=True, null=True, on_delete=models.SET_NULL)
+    image = StdImageField(_('image'), upload_to=get_file_path, blank=True, variations={'thumb': (480, 480)})
     slug = models.SlugField('slug', max_length=100, editable=False)
 
     def __str__(self):
