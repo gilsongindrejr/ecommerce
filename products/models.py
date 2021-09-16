@@ -28,6 +28,7 @@ class Product(models.Model):
     def save(self, *args, **kwargs):
         if not self.id:
             self.slug = slugify(self.name)
+        super(Product, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = _('Product')
