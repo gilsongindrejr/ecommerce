@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     # My apps
     'users',
+    'products',
 
     # 3rd party apps
     'bootstrap4',
