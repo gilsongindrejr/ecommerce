@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load product_obj %}
+
+{% block content %}
+    {% if cart %}
+        <h1 class="my-3 mx-5">Cart</h1>
+        <h5 class="my-3 mx-5">Total: {{ cart|cart_total }}</h5>
+        <div class="card-group container">
+            <div class="row mx-auto">
+                {% for product_id in cart %}
+                    <div class="col-sm">
+                        <div class="card m-3" style="width: 18rem;">
+                            <a href="#"><img class="card-img-top" src="{{ cart|product_image:product_id }}" alt="Card image cap"></a>
+                            <div class="card-body py-1 row">
+                                <h5 class="card-title col">{{ cart|product_obj:product_id }}</h5>
+                                <h5 class="card-text col">{{ cart|product_price:product_id }}</h5>
+                            </div>
+                            <div class="card-body py-1 row">
+                                <h5 class="card-text col">Quantity: {{ cart|product_quantity:product_id }}</h5>
+                                <h5 class="card-text col">Total: {{ cart|product_total:product_id }}</h5>
+                            </div>
+                            <div class="card-body py-1 row">
+                                <a href="{% url 'add' product_id %}" class="btn btn-primary mx-2">+</a>
+                                <a href="{% url 'remove' product_id %}" class="btn btn-primary mx-2">-</a>
+                                <a href="{% url 'delete' product_id %}" class="btn btn-primary mx-2">Remove</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Product info
+                    <h1 class="my3 mx-3">Product:</h1>
+                    <h1>{{ cart|product_obj:product_id }}</h1>
+                    <h1>{{ cart|product_quantity:product_id }}</h1>
+                    <h1>{{ cart|product_price:product_id }}</h1>
+                    -->
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <h1 class="my-3 mx-5">Cart is empty</h1>
+    {% endif %}
+{% endblock %}
