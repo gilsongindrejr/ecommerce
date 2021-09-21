@@ -16,8 +16,10 @@ class CartView(TemplateView):
     template_name = 'cart.html'
 
     def get(self, request, *args, **kwargs):
-
-        cart = request.session['cart']
+        if request.session.get('cart') is None:
+            cart = request.session['cart'] = {}
+        else:
+            cart = request.session['cart']
 
         if request.session.get('cart') is None:
             context = {'message': 'Cart is empty'}
