@@ -6,6 +6,9 @@
     {% if cart %}
         <h1 class="my-3 mx-5">Cart</h1>
         <h5 class="my-3 mx-5">Total: {{ cart|cart_total }}</h5>
+        {% if cart|length >= 1%}
+            <a href="{% url 'checkout' %}" class="btn btn-primary mx-5">Purchase</a>
+        {% endif %}
         <div class="card-group container">
             <div class="row mx-auto">
                 {% for product_id in cart %}

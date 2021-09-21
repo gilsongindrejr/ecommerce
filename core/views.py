@@ -84,3 +84,13 @@ class CartDeleteView(TemplateView):
         del cart[product_id]
         request.session.modified = True
         return redirect('cart')
+
+
+class CheckoutView(TemplateView):
+    template_name = 'checkout.html'
+
+    def get(self, request, *args, **kwargs):
+        if request.user.address is None:
+            return redirect('address')
+        return render(request, self.template_name)
+

@@ -5,6 +5,23 @@ from django.utils.translation import gettext_lazy as _
 from stdimage import StdImageField
 
 
+class Address(models.Model):
+    zip_code = models.CharField(_('zip code'), max_length=15, blank=False)
+    address = models.CharField(_('address'), max_length=50, blank=False)
+    house_number = models.CharField(_('house number'), max_length=10, blank=False)
+    complement = models.CharField(_('complement'), max_length=150, blank=True)
+    neighborhood = models.CharField(_('neighborhood'), max_length=100, blank=False)
+    city = models.CharField(_('city'), max_length=100, blank=False)
+    state = models.CharField(_('state'), max_length=100, blank=False)
+
+    def __str__(self):
+        return self.address
+
+    class Meta:
+        verbose_name = 'Address'
+        verbose_name_plural = 'Addresses'
+
+
 # Could have used products.models.get_file_path function
 # Decided to create another to keep file independency
 def get_file_path(_instance, filename) -> str:
@@ -47,6 +64,7 @@ class User(AbstractUser):
     email = models.EmailField('email', max_length=50, unique=True)
     cpf = models.CharField('CPF', max_length=14, unique=True)
     username = None
+    address = models.ForeignKey(Address, verbose_name=_('address'), blank=True, null=True, on_delete=models.CASCADE)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ('first_name', 'last_name', 'cpf')
@@ -55,20 +73,3 @@ class User(AbstractUser):
         return self.email
 
     objects = UserManager()
-
-
-class Address(models.Model):
-    zip_code = models.CharField(_('zip code'), max_length=15, blank=False)
-    address = models.CharField(_('address'), max_length=50, blank=False)
-    house_number = models.CharField(_('house number'), max_length=10, blank=False)
-    complement = models.CharField(_('complement'), max_length=150, blank=True)
-    neighborhood = models.CharField(_('neighborhood'), max_length=100, blank=False)
-    city = models.CharField(_('city'), max_length=100, blank=False)
-    state = models.CharField(_('state'), max_length=100, blank=False)
-
-    def __str__(self):
-        return self.address
-
-    class Meta:
-        verbose_name = 'Address'
-        verbose_name_plural = 'Addresses'
