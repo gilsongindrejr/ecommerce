@@ -1,10 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load bootstrap4 %}
 
-</body>
-</html>
+{% block content %}
+    <div class="container my-5 align-items-center">
+            <form method="post" class="form-signin">
+                {% csrf_token %}
+
+                <div class="row my-1"
+                    <label for="email" class="sr-only"></label>
+                    <input type="email" id="username" name="username" placeholder="Email" required autofocus>
+                </div>
+                <div class="row">
+                    <label for="password" class="sr-only"></label>
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                </div>
+                <div class="row my-3">
+                    <input type="submit" class="btn btn-primary" value="Login">
+                </div>
+            </form>
+    </div>
+{% endblock %}
