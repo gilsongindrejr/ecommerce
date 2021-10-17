@@ -1,4 +1,4 @@
-# Ecommerce
+# Pycommerce
 
 Ecommerce web site using django 3, with the cart app made using django sessions. 
 
