@@ -5,7 +5,6 @@
 .coveragerc
 .coverage
 htmlcov/*
-*/migrations/*
 db.sqlite3
 pytest.ini
 media/*
