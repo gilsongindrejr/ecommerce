@@ -2,7 +2,7 @@
 
 Ecommerce web site using django 3, with the cart app made using django sessions. 
 
-# Running backend server
+# Running the project
 
 #### Clone this repository
 ```
@@ -14,27 +14,26 @@ $ git clone <https://github.com/gilsongindrejr/ecommerce.git>
 $ cd ecommerce
 ```
 
-#### Activate the virtual enviroment
+#### Build the container
 ```
-$ source venv/bin/activate
-```
-
-#### Install requirements
-```
-$ pip install -r requirements.txt
+$ docker-compose up --build
 ```
 
 #### Migrate the database
 ```
-$ python manage.py migrate
+$ docker-compose exec web python manage.py migrate
+```
+#### Create super user
+```
+$ docker-compose exec web python manage.py createsuperuser
 ```
 
-#### Run server
-```
-$ python manage.py runserver
-```
+##### The server will be initiated on port 80 - access <http://127.0.0.1> 
 
-#### The server will be initiated on port 8000 - access <http://127.0.0.1:8000> 
+# Server shell
+```
+$ docker-compose exec web bash
+```
 
 # Testing
 
@@ -43,7 +42,7 @@ The tests was made using pytest.
 
 #### Run tests and show coverage
 ```
-$ pytest --cov
+$ docker-compose exec web pytest --cov
 ```
 
 #### Run tests and create coverage html page
