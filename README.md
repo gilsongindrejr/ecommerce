@@ -16,7 +16,7 @@ $ cd ecommerce
 
 #### Build the container
 ```
-$ docker-compose up --build
+$ docker-compose up --build -d
 ```
 
 #### Migrate the database
